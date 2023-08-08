@@ -14,5 +14,6 @@ class SubRubroQuery(BaseModel):
     desc: str
 
 
-class KeywordQuery(BaseModel):
-    keyword: str
+class WordQuery(BaseModel):
+    word: str
+

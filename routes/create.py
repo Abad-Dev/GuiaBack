@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from db import init_connection
-from models import RubroQuery, SubRubroQuery, KeywordQuery
+from models import RubroQuery, SubRubroQuery, WordQuery
 
 router = APIRouter()
 
@@ -29,12 +29,24 @@ def create_rubro(sub_rubro: SubRubroQuery):
 
 
 @router.post('/keyword')
-def create_keyword(keyword: KeywordQuery):
+def create_keyword(keyword: WordQuery):
     conn = init_connection()
     with conn.cursor() as cursor:
         cursor.execute(
             'INSERT INTO KEYWORDS (KEYWORD) VALUES (%s)', 
-            (keyword.keyword).upper()
+            (keyword.word).upper()
         )
     conn.commit()
-    conn.close()    
+    conn.close() 
+
+
+@router.post('/invalid_words')
+def create_invalid_word(invalid_word: WordQuery):
+    conn = init_connection()
+    with conn.cursor() as cursor:
+        cursor.execute(
+            'INSERT INTO INVALID_WORDS (WORD) VALUES (%s)', 
+            (invalid_word.word).upper()
+        )
+    conn.commit()
+    conn.close() 

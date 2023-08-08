@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from routes import posts
+from routes import create
 
 
 app = FastAPI()
-app.include_router(posts.router)
+app.include_router(create.router)
 
 
 @app.get('/')
