@@ -14,6 +14,14 @@ class SubRubroQuery(BaseModel):
     desc: str
 
 
+class DistritoQuery(BaseModel):
+    name: str
+
+
 class WordQuery(BaseModel):
     word: str
 
+
+class RelationQuery(BaseModel):
+    fk1: int
+    fk2: int

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from db import init_connection
-from models import RubroQuery, SubRubroQuery, WordQuery
+from models import RubroQuery, SubRubroQuery, DistritoQuery, WordQuery
 
 router = APIRouter()
 
@@ -28,6 +28,19 @@ def create_rubro(sub_rubro: SubRubroQuery):
     conn.close()
 
 
+@router.post('/distrito')
+def create_rubro(distrito: DistritoQuery):
+    conn = init_connection()
+    with conn.cursor() as cursor:
+        cursor.execute(
+            'INSERT INTO DISTRITOS (NAME) VALUES (%s)', 
+            distrito.name
+        )
+    conn.commit()
+    conn.close()
+
+
+
 @router.post('/keyword')
 def create_keyword(keyword: WordQuery):
     conn = init_connection()
@@ -40,7 +53,7 @@ def create_keyword(keyword: WordQuery):
     conn.close() 
 
 
-@router.post('/invalid_words')
+@router.post('/invalid-words')
 def create_invalid_word(invalid_word: WordQuery):
     conn = init_connection()
     with conn.cursor() as cursor:
