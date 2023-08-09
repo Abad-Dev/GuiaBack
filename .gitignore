@@ -2,3 +2,4 @@ venv/
 .env
 routes/__pycache__
 __pycache__
+.space
