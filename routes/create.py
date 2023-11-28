@@ -53,7 +53,7 @@ def create_keyword(keyword: WordQuery):
     conn.close() 
 
 
-@router.post('/invalid-words')
+@router.post('/invalid-word')
 def create_invalid_word(invalid_word: WordQuery):
     conn = init_connection()
     with conn.cursor() as cursor:
