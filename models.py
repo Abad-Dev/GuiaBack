@@ -25,3 +25,7 @@ class WordQuery(BaseModel):
 class RelationQuery(BaseModel):
     fk1: int
     fk2: int
+
+
+class DeleteQuery(BaseModel):
+    id: int

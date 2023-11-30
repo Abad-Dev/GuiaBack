@@ -1,8 +1,22 @@
 from fastapi import APIRouter
 from db import init_connection
-from models import RelationQuery
+from models import RelationQuery, DeleteQuery
 
 router = APIRouter()
+
+
+@router.delete('/anunciante')
+def delete_anunciante(query: DeleteQuery):
+    conn = init_connection()
+    with conn.cursor() as cursor:
+        cursor.execute(
+            'DELETE FROM REL_DISTRITOS_ANUNCIANTES WHERE FK_ANUNCIANTE = %s', query.id
+        )
+        cursor.execute(
+            'DELETE FROM ANUNCIANTES WHERE ID = %s', query.id, 
+        )
+    conn.commit()
+    conn.close()
 
 
 @router.delete('/rel-distritos-anunciantes')
